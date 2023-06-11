@@ -1,0 +1,21 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.6, pytest-7.3.1, pluggy-1.0.0
+rootdir: /home/kacper/grug_coder
+plugins: hypothesis-6.78.0
+collected 6 items
+
+solutions/test_filter_by_substring.py ..F...                             [100%]
+
+=================================== FAILURES ===================================
+___________________________ test_one_matching_string ___________________________
+
+    def test_one_matching_string():
+>       assert filter_by_substring(['apple', 'banana', 'cherry'], 'a') == ['apple']
+E       AssertionError: assert ['apple', 'banana'] == ['apple']
+E         Left contains one more item: 'banana'
+E         Use -v to get more diff
+
+solutions/test_filter_by_substring.py:14: AssertionError
+=========================== short test summary info ============================
+FAILED solutions/test_filter_by_substring.py::test_one_matching_string - Asse...
+========================= 1 failed, 5 passed in 0.01s ==========================
