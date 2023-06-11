@@ -1,0 +1,7 @@
+.hypothesis/
+
+# VS Code settings directory
+.vscode/
+
+# Python cache files
+__pycache__/

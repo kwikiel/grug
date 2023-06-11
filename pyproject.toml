@@ -10,6 +10,8 @@ packages = [{include = "grug_coder"}]
 python = "^3.10"
 openai = "^0.27.8"
 pytest = "^7.3.1"
+hypothesis = "^6.78.0"
+responses = "^0.23.1"
 
 
 [build-system]
