@@ -1,0 +1,16 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.6, pytest-7.3.1, pluggy-1.0.0
+rootdir: /home/kacper/grug_coder/grug_coder
+collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+_____________________ ERROR collecting test_below_zero.py ______________________
+test_below_zero.py:1: in <module>
+    from grug_coder.below_zero import below_zero
+below_zero.py:1: in <module>
+    def below_zero(operations: List[int]) -> bool:
+E   NameError: name 'List' is not defined
+=========================== short test summary info ============================
+ERROR test_below_zero.py - NameError: name 'List' is not defined
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.03s ===============================

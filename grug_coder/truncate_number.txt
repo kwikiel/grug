@@ -1,0 +1,22 @@
+============================= test session starts ==============================
+platform linux -- Python 3.10.6, pytest-7.3.1, pluggy-1.0.0
+rootdir: /home/kacper/grug_coder/grug_coder
+collected 1 item
+
+test_truncate_number.py F                                                [100%]
+
+=================================== FAILURES ===================================
+_____________________________ test_truncate_number _____________________________
+
+    def test_truncate_number():
+        assert truncate_number(3.5) == 0.5
+        assert truncate_number(0.12345) == 0.12345
+        assert truncate_number(10) == 0
+>       assert truncate_number(-3.5) == None
+E       assert 0.5 == None
+E        +  where 0.5 = truncate_number(-3.5)
+
+test_truncate_number.py:8: AssertionError
+=========================== short test summary info ============================
+FAILED test_truncate_number.py::test_truncate_number - assert 0.5 == None
+============================== 1 failed in 0.01s ===============================
