@@ -93,6 +93,30 @@ if __name__ == "__main__":
     generator = CodeGenerator(file_path = "/home/kacper/grug_coder/grug_coder/humaneval.json")
     data_sample = generator.data[0:10]
 
+    import json
+
+    data = []
+
+    # Opening JSON file
+    with open('/home/kacper/grug_coder/grug_coder/humaneval.json', 'r') as file:
+        for line in file:
+            data.append(json.loads(line))
+    
+    function_names = []
+    for obj in data:
+        function_names.append(obj["prompt"].split("def ")[1].split("(")[0])
+
+
+
+    # Convert function_names to a list of dictionaries with the function name as the key
+
+    function_names_dict = {
+        x for x in function_names
+    }
+    
+    print(function_names_dict)
+    
+
 
     for data in data_sample:
         signature = data["prompt"]
@@ -128,4 +152,4 @@ if __name__ == "__main__":
 
 
         # Save the results of the test run to the testing_results directory 
-        print(generator.run_pytest(test_file = f"test_{filename}.py", result_file=f"{filename}.txt"))
+        #print(generator.run_pytest(test_file = f"test_{filename}.py", result_file=f"{filename}.txt"))
