@@ -90,15 +90,15 @@ class CodeGenerator:
 
 
 if __name__ == "__main__":
-    generator = CodeGenerator(file_path = "/home/kacper/grug_coder/grug_coder/humaneval.json")
-    data_sample = generator.data[0:10]
+    generator = CodeGenerator(file_path = "/Users/dawid/pjatk/kolkoai/grug/grug_coder/humaneval.json")
+    data_sample = generator.data[0:1]
 
     import json
 
     data = []
 
     # Opening JSON file
-    with open('/home/kacper/grug_coder/grug_coder/humaneval.json', 'r') as file:
+    with open('/Users/dawid/pjatk/kolkoai/grug/grug_coder/humaneval.json', 'r') as file:
         for line in file:
             data.append(json.loads(line))
     
@@ -152,4 +152,4 @@ if __name__ == "__main__":
 
 
         # Save the results of the test run to the testing_results directory 
-        #print(generator.run_pytest(test_file = f"test_{filename}.py", result_file=f"{filename}.txt"))
+        print(generator.run_pytest(test_file = f"test_{filename}.py", result_file=f"{filename}.txt"))
