@@ -1,9 +1,0 @@
-============================= test session starts ==============================
-platform linux -- Python 3.10.6, pytest-7.3.1, pluggy-1.0.0
-rootdir: /home/kacper/grug_coder
-plugins: hypothesis-6.78.0
-collected 7 items
-
-solutions/test_has_close_elements.py .......                             [100%]
-
-============================== 7 passed in 0.01s ===============================
