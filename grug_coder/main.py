@@ -4,7 +4,11 @@ import openai
 import subprocess
 import json
 
-openai.api_key = "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"
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def hello_world():
     return ("Hello, World!")
@@ -90,7 +94,7 @@ class CodeGenerator:
 
 
 if __name__ == "__main__":
-    generator = CodeGenerator(file_path = "/Users/dawid/pjatk/kolkoai/grug/grug_coder/humaneval.json")
+    generator = CodeGenerator(file_path = "humaneval.json")
     data_sample = generator.data[0:1]
 
     import json
@@ -98,7 +102,7 @@ if __name__ == "__main__":
     data = []
 
     # Opening JSON file
-    with open('/Users/dawid/pjatk/kolkoai/grug/grug_coder/humaneval.json', 'r') as file:
+    with open('humaneval.json', 'r') as file:
         for line in file:
             data.append(json.loads(line))
     
