@@ -32,7 +32,6 @@ class CodeGenerator:
 
     @staticmethod
     def extract_python_code(text: str) -> str:
-        # Extract code from backticks
         if "```python\n" in text:
             code = text.split("```python\n")[1].split("```")[0]
         elif "```\n" in text:
@@ -41,10 +40,7 @@ class CodeGenerator:
             code = text.split("`")[1]
         else:
             code = text
-
-
         return code
-
 
     def openai_request(self, system_message, user_message):
         response = openai.ChatCompletion.create(
@@ -55,6 +51,18 @@ class CodeGenerator:
             ],
         )
         return response["choices"][0]["message"]["content"]
+
+    def apply_reflection(self, signature, previous_code, unit_test_results):
+        response = openai.ChatCompletion.create(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": """You are a Python writing assistant. You will be given your previous implementation of a function,
+                a series of unit tests results, and your self-reflection on your previous implementation.
+                Always return full implementation of the function with applied changes based on your reflection. Return it in python markdown format.
+                """},
+                {"role": "user", "content": f" Write robust fixed implementation of  {signature} the previous code is here {previous_code} and the result on the unit tests is {unit_test_results}"},
+            ])  
+        return (response["choices"][0]["message"]["content"])
 
     def save_code(self, code, filename):
         dir_path = os.path.join("solutions")
@@ -87,73 +95,47 @@ class CodeGenerator:
         with open(result_path, "w") as f:
             process = subprocess.run(["pytest", os.path.join(dir_path, test_file)], stdout=f, stderr=f)
 
-        
-        # Return True if tests passed successfully, otherwise False
-        return process.returncode == 0
-            
-
+        return process.returncode == 0, result_path
 
 if __name__ == "__main__":
     generator = CodeGenerator(file_path = "humaneval.json")
-    data_sample = generator.data[0:1]
-
-    import json
-
-    data = []
-
-    # Opening JSON file
-    with open('humaneval.json', 'r') as file:
-        for line in file:
-            data.append(json.loads(line))
-    
-    function_names = []
-    for obj in data:
-        function_names.append(obj["prompt"].split("def ")[1].split("(")[0])
-
-
-
-    # Convert function_names to a list of dictionaries with the function name as the key
-
-    function_names_dict = {
-        x for x in function_names
-    }
-    
-    print(function_names_dict)
-    
-
+    data_sample = generator.data[1:100]
 
     for data in data_sample:
         signature = data["prompt"]
         filename = data["prompt"].split("def ")[1].split("(")[0]
         function_name = filename
+        code = ""
 
-        # If the filename.py already exists, skip it
         if os.path.exists(f"solutions/{filename}.py"):
             print(f"Skipping {filename}.py because it already exists. Not generating new code.")
-        
         else:
-
-
-            code = generator.extract_python_code(text = generator.openai_request(
+            response = generator.openai_request(
                 system_message="You are a Python writing assistant...",
                 user_message=f"Implement in python: {signature}")
-            )
+            code = generator.extract_python_code(text = response)
             generator.save_code(code, f"{filename}.py")
 
-        # If the test_filename.py already exists, skip it
         if os.path.exists(f"solutions/test_{filename}.py"):
             print(f"Skipping test_{filename}.py because it already exists. Not generating new code.")
-
         else:
-            tests = generator.extract_python_code(text = generator.openai_request(
+            response = generator.openai_request(
                 system_message="You are a Python writing assistant...",
                 user_message=f"Write pytest unit tests in python for a function with given signature: {signature}, write just the tests, not the implementation.")
-            )
+            tests = generator.extract_python_code(text = response)
             generator.save_code(tests, f"test_{filename}.py")
-
-
             generator.prepend_line_to_file(filename=f"test_{filename}.py", line = f"from {filename} import {filename}")
 
+        success, result_path = generator.run_pytest(test_file = f"test_{filename}.py", result_file=f"{filename}.txt")
 
-        # Save the results of the test run to the testing_results directory 
-        print(generator.run_pytest(test_file = f"test_{filename}.py", result_file=f"{filename}.txt"))
+        iteration_count = 0
+        while not success and iteration_count < 10:
+            with open(result_path, "r") as f:
+                unit_test_results = f.read()
+
+            response = generator.apply_reflection(signature, code, unit_test_results)
+            reflected_code = generator.extract_python_code(response)
+            generator.save_code(reflected_code, f"{filename}.py")
+            success, result_path = generator.run_pytest(test_file = f"test_{filename}.py", result_file=f"{filename}.txt")
+            iteration_count += 1
+            code = reflected_code
