@@ -12,6 +12,7 @@ openai = "^0.27.8"
 pytest = "^7.3.1"
 hypothesis = "^6.78.0"
 responses = "^0.23.1"
+python-dotenv = "^1.0.0"
 
 
 [build-system]
