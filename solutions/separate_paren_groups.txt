@@ -1,0 +1,277 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.3, pytest-7.3.1, pluggy-1.0.0
+rootdir: /Users/kacper/Projects/Repos/grug
+plugins: hypothesis-6.78.0, anyio-3.7.0
+collected 7 items
+
+solutions/test_separate_paren_groups.py FFFFFFF                          [100%]
+
+=================================== FAILURES ===================================
+___________________ test_separate_paren_groups_empty_string ____________________
+
+    def test_separate_paren_groups_empty_string():
+>       assert separate_paren_groups("") == []
+
+solutions/test_separate_paren_groups.py:3: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paren_string = ''
+
+    def separate_paren_groups(paren_string: str) -> List[str]:
+        """
+        Separates a string containing multiple groups of nested parentheses into a list
+        of separate strings.
+    
+        Args:
+            paren_string: A string containing multiple groups of nested parentheses.
+    
+        Returns:
+            List[str]: A list of the separate groups of nested parentheses.
+    
+        Examples:
+            >>> separate_paren_groups('( ) (( )) (( )( ))')
+            ['()', '(())', '(()())']
+        """
+        # Remove all spaces from the input string
+        paren_string = paren_string.replace(' ', '')
+    
+        # Use regex to match all balanced groups of parentheses and check if they are balanced
+        matches = []
+        pattern = r"\(([^()]*)\)"
+        start = 0
+        while True:
+>           match = re.search(pattern, paren_string[start:])
+E           NameError: name 're' is not defined
+
+solutions/separate_paren_groups.py:27: NameError
+__________________ test_separate_paren_groups_no_paren_group ___________________
+
+    def test_separate_paren_groups_no_paren_group():
+>       assert separate_paren_groups("no groups here") == []
+
+solutions/test_separate_paren_groups.py:6: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paren_string = 'nogroupshere'
+
+    def separate_paren_groups(paren_string: str) -> List[str]:
+        """
+        Separates a string containing multiple groups of nested parentheses into a list
+        of separate strings.
+    
+        Args:
+            paren_string: A string containing multiple groups of nested parentheses.
+    
+        Returns:
+            List[str]: A list of the separate groups of nested parentheses.
+    
+        Examples:
+            >>> separate_paren_groups('( ) (( )) (( )( ))')
+            ['()', '(())', '(()())']
+        """
+        # Remove all spaces from the input string
+        paren_string = paren_string.replace(' ', '')
+    
+        # Use regex to match all balanced groups of parentheses and check if they are balanced
+        matches = []
+        pattern = r"\(([^()]*)\)"
+        start = 0
+        while True:
+>           match = re.search(pattern, paren_string[start:])
+E           NameError: name 're' is not defined
+
+solutions/separate_paren_groups.py:27: NameError
+_______________ test_separate_paren_groups_single_balanced_group _______________
+
+    def test_separate_paren_groups_single_balanced_group():
+>       assert separate_paren_groups("( )") == ["()"]
+
+solutions/test_separate_paren_groups.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paren_string = '()'
+
+    def separate_paren_groups(paren_string: str) -> List[str]:
+        """
+        Separates a string containing multiple groups of nested parentheses into a list
+        of separate strings.
+    
+        Args:
+            paren_string: A string containing multiple groups of nested parentheses.
+    
+        Returns:
+            List[str]: A list of the separate groups of nested parentheses.
+    
+        Examples:
+            >>> separate_paren_groups('( ) (( )) (( )( ))')
+            ['()', '(())', '(()())']
+        """
+        # Remove all spaces from the input string
+        paren_string = paren_string.replace(' ', '')
+    
+        # Use regex to match all balanced groups of parentheses and check if they are balanced
+        matches = []
+        pattern = r"\(([^()]*)\)"
+        start = 0
+        while True:
+>           match = re.search(pattern, paren_string[start:])
+E           NameError: name 're' is not defined
+
+solutions/separate_paren_groups.py:27: NameError
+_____________ test_separate_paren_groups_multiple_balanced_groups ______________
+
+    def test_separate_paren_groups_multiple_balanced_groups():
+>       assert separate_paren_groups("( ) (( )) (( )( ))") == ["()", "(())", "(()())"]
+
+solutions/test_separate_paren_groups.py:12: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paren_string = '()(())(()())'
+
+    def separate_paren_groups(paren_string: str) -> List[str]:
+        """
+        Separates a string containing multiple groups of nested parentheses into a list
+        of separate strings.
+    
+        Args:
+            paren_string: A string containing multiple groups of nested parentheses.
+    
+        Returns:
+            List[str]: A list of the separate groups of nested parentheses.
+    
+        Examples:
+            >>> separate_paren_groups('( ) (( )) (( )( ))')
+            ['()', '(())', '(()())']
+        """
+        # Remove all spaces from the input string
+        paren_string = paren_string.replace(' ', '')
+    
+        # Use regex to match all balanced groups of parentheses and check if they are balanced
+        matches = []
+        pattern = r"\(([^()]*)\)"
+        start = 0
+        while True:
+>           match = re.search(pattern, paren_string[start:])
+E           NameError: name 're' is not defined
+
+solutions/separate_paren_groups.py:27: NameError
+______________ test_separate_paren_groups_single_unbalanced_group ______________
+
+    def test_separate_paren_groups_single_unbalanced_group():
+>       assert separate_paren_groups("( ) ( ( )") == []
+
+solutions/test_separate_paren_groups.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paren_string = '()(()'
+
+    def separate_paren_groups(paren_string: str) -> List[str]:
+        """
+        Separates a string containing multiple groups of nested parentheses into a list
+        of separate strings.
+    
+        Args:
+            paren_string: A string containing multiple groups of nested parentheses.
+    
+        Returns:
+            List[str]: A list of the separate groups of nested parentheses.
+    
+        Examples:
+            >>> separate_paren_groups('( ) (( )) (( )( ))')
+            ['()', '(())', '(()())']
+        """
+        # Remove all spaces from the input string
+        paren_string = paren_string.replace(' ', '')
+    
+        # Use regex to match all balanced groups of parentheses and check if they are balanced
+        matches = []
+        pattern = r"\(([^()]*)\)"
+        start = 0
+        while True:
+>           match = re.search(pattern, paren_string[start:])
+E           NameError: name 're' is not defined
+
+solutions/separate_paren_groups.py:27: NameError
+___________________ test_separate_paren_groups_mixed_groups ____________________
+
+    def test_separate_paren_groups_mixed_groups():
+>       assert separate_paren_groups("( ) (( )) ( ( )") == ["()", "(())"]
+
+solutions/test_separate_paren_groups.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paren_string = '()(())(()'
+
+    def separate_paren_groups(paren_string: str) -> List[str]:
+        """
+        Separates a string containing multiple groups of nested parentheses into a list
+        of separate strings.
+    
+        Args:
+            paren_string: A string containing multiple groups of nested parentheses.
+    
+        Returns:
+            List[str]: A list of the separate groups of nested parentheses.
+    
+        Examples:
+            >>> separate_paren_groups('( ) (( )) (( )( ))')
+            ['()', '(())', '(()())']
+        """
+        # Remove all spaces from the input string
+        paren_string = paren_string.replace(' ', '')
+    
+        # Use regex to match all balanced groups of parentheses and check if they are balanced
+        matches = []
+        pattern = r"\(([^()]*)\)"
+        start = 0
+        while True:
+>           match = re.search(pattern, paren_string[start:])
+E           NameError: name 're' is not defined
+
+solutions/separate_paren_groups.py:27: NameError
+________________ test_separate_paren_groups_space_within_group _________________
+
+    def test_separate_paren_groups_space_within_group():
+>       assert separate_paren_groups("( ) ( ( a b c d ) )") == ["()", "((abcd))"]
+
+solutions/test_separate_paren_groups.py:21: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+paren_string = '()((abcd))'
+
+    def separate_paren_groups(paren_string: str) -> List[str]:
+        """
+        Separates a string containing multiple groups of nested parentheses into a list
+        of separate strings.
+    
+        Args:
+            paren_string: A string containing multiple groups of nested parentheses.
+    
+        Returns:
+            List[str]: A list of the separate groups of nested parentheses.
+    
+        Examples:
+            >>> separate_paren_groups('( ) (( )) (( )( ))')
+            ['()', '(())', '(()())']
+        """
+        # Remove all spaces from the input string
+        paren_string = paren_string.replace(' ', '')
+    
+        # Use regex to match all balanced groups of parentheses and check if they are balanced
+        matches = []
+        pattern = r"\(([^()]*)\)"
+        start = 0
+        while True:
+>           match = re.search(pattern, paren_string[start:])
+E           NameError: name 're' is not defined
+
+solutions/separate_paren_groups.py:27: NameError
+=========================== short test summary info ============================
+FAILED solutions/test_separate_paren_groups.py::test_separate_paren_groups_empty_string
+FAILED solutions/test_separate_paren_groups.py::test_separate_paren_groups_no_paren_group
+FAILED solutions/test_separate_paren_groups.py::test_separate_paren_groups_single_balanced_group
+FAILED solutions/test_separate_paren_groups.py::test_separate_paren_groups_multiple_balanced_groups
+FAILED solutions/test_separate_paren_groups.py::test_separate_paren_groups_single_unbalanced_group
+FAILED solutions/test_separate_paren_groups.py::test_separate_paren_groups_mixed_groups
+FAILED solutions/test_separate_paren_groups.py::test_separate_paren_groups_space_within_group
+============================== 7 failed in 0.03s ===============================

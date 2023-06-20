@@ -1,0 +1,9 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.3, pytest-7.3.1, pluggy-1.0.0
+rootdir: /Users/kacper/Projects/Repos/grug
+plugins: hypothesis-6.78.0, anyio-3.7.0
+collected 5 items
+
+solutions/test_intersperse.py .....                                      [100%]
+
+============================== 5 passed in 0.01s ===============================
